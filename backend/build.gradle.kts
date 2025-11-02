@@ -4,7 +4,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.7"
     kotlin("jvm") version "1.9.25"
     kotlin("plugin.spring") version "1.9.25"
-    kotlin("plugin.jpa") version "1.9.25"
+    kotlin("plugin.jpa") version "1.9.25" // JPA 엔티티를 Kotlin에서 쉽게 사용할 수 있도록 도와줌 (자동 open, 기본 생성자 추가).
 }
 
 group = "com"
@@ -48,12 +48,17 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 }
 
+//JSR-305는 Java의 @Nullable 및 @NonNull과 같은 애너테이션을 정밀하게 다룰 수 있도록 도와주는 표준.
+//strict 모드에서는 @Nullable이 붙은 Java 코드를 Kotlin에서 ?(nullable)로 정확하게 인식하고,
+// @NonNull이 붙은 경우 컴파일러에서 Null Safety를 강제
 kotlin {
     compilerOptions {
         freeCompilerArgs.addAll("-Xjsr305=strict")
     }
 }
 
+// @Entity, @MappedSuperclass, @Embeddable 애너테이션이 붙은 클래스는 자동으로 open 키워드를 가진 것처럼 처리.
+// plugin.jpa에 내포되어 있으므로 사실상 필요 없음
 allOpen {
     annotation("jakarta.persistence.Entity")
     annotation("jakarta.persistence.MappedSuperclass")
