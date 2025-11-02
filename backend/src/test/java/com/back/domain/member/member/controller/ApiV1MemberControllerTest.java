@@ -70,7 +70,7 @@ public class ApiV1MemberControllerTest {
                 .andExpect(jsonPath("$.data.memberDto.createDate").exists())
                 .andExpect(jsonPath("$.data.memberDto.modifyDate").exists())
                 .andExpect(jsonPath("$.data.memberDto.name").value(nickname))
-                .andExpect(jsonPath("$.data.memberDto.admin").value(false));
+                .andExpect(jsonPath("$.data.memberDto.isAdmin").value(false));
     }
 
 
