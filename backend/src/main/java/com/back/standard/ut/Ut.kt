@@ -7,9 +7,8 @@ import java.security.Key
 import java.util.*
 
 class Ut {
-    object jwt {
-
-        @JvmStatic
+    companion object jwt {
+        // Java에서 호출할 수 있도록 함. @JvmStatic이 없으면 자바에서 클래스명.Companion.메서드명()으로 호출해야 합니다.
         fun toString(secret: String, expireSeconds: Long, body: Map<String, Any>): String {
 
             val issuedAt = Date()
@@ -27,7 +26,6 @@ class Ut {
             return jwt
         }
 
-        @JvmStatic
         fun isValid(jwt: String, secretPattern: String): Boolean {
             val secretKey = Keys.hmacShaKeyFor(secretPattern.toByteArray(StandardCharsets.UTF_8))
 
@@ -41,8 +39,7 @@ class Ut {
             }.getOrElse { false }
 
         }
-
-        @JvmStatic
+        
         fun payloadOrNull(jwt: String, secretPattern: String): Map<String, Any>? {
             val secretKey = Keys.hmacShaKeyFor(secretPattern.toByteArray(StandardCharsets.UTF_8))
 

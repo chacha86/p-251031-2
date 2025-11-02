@@ -16,7 +16,6 @@ public class AuthTokenService {
     private long expireSeconds;
 
     String genAccessToken(Member member) {
-
         return Ut.jwt.toString(
                 secretPattern,
                 expireSeconds,
