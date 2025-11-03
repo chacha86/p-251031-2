@@ -6,7 +6,7 @@ import lombok.Getter
 
 @AllArgsConstructor
 @Getter
-class RsData<T> @JvmOverloads constructor (
+class RsData<T> @JvmOverloads constructor(
     val resultCode: String,
     val msg: String,
     val data: T? = null
@@ -14,9 +14,6 @@ class RsData<T> @JvmOverloads constructor (
 
     @get:JsonIgnore
     val statusCode: Int
-        get() {
-            val statusCode =
-                resultCode.split("-".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
-            return statusCode.toInt()
-        }
+        get() = resultCode.split("-".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0].toInt()
+
 }
