@@ -33,7 +33,7 @@ public class Member extends BaseEntity {
     }
 
     public Member(Long id, String username, String nickname) {
-        this.setId(id);
+        super(id);
         this.username = username;
         this.nickname = nickname;
     }
