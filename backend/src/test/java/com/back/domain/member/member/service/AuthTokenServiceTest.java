@@ -1,6 +1,5 @@
 package com.back.domain.member.member.service;
 
-import com.back.domain.member.member.service.AuthTokenService;
 import com.back.domain.member.member.entity.Member;
 import com.back.domain.member.member.repository.MemberRepository;
 import com.back.standard.ut.Ut;
@@ -106,7 +105,7 @@ public class AuthTokenServiceTest {
     @DisplayName("AuthTokenService를 통해서 accessToken 생성")
     void t4() {
 
-        Member member1 = memberRepository.findByUsername("user3").get();
+        Member member1 = memberRepository.findByUsername("user3");
         String accessToken = authTokenService.genAccessToken(member1);
         assertThat(accessToken).isNotBlank();
 

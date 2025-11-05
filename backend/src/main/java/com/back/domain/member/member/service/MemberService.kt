@@ -23,10 +23,9 @@ class MemberService(
     }
 
     fun join(username: String, password: String, nickname: String, profileImgUrl: String?): Member {
-        memberRepository.findByUsername(username)
-            .ifPresent { m: Member ->
-                throw ServiceException("409-1", "이미 사용중인 아이디입니다.")
-            }
+        memberRepository.findByUsername(username)?.let {
+            throw ServiceException("409-1", "이미 사용중인 아이디입니다.")
+        }
 
         val member = Member(username, passwordEncoder.encode(password), nickname, profileImgUrl)
         return memberRepository.save(member)
@@ -34,15 +33,12 @@ class MemberService(
 
 
     fun modifyOrJoin(username: String, password: String, nickname: String, profileImgUrl: String?): Member {
-        val member = memberRepository.findByUsername(username).orElse(null)
-            ?: return join(username, password, nickname, profileImgUrl)
-
-        member.update(nickname, profileImgUrl)
-
-        return member
+        return memberRepository.findByUsername(username)
+            ?.apply { update(nickname, profileImgUrl) }
+            ?: join(username, password, nickname, profileImgUrl)
     }
 
-    fun findByUsername(username: String): Optional<Member> {
+    fun findByUsername(username: String): Member? {
         return memberRepository.findByUsername(username)
     }
 
@@ -55,7 +51,7 @@ class MemberService(
     }
 
     // TODO: payload로 이름 변경 고민
-    fun payloadOrNull(accessToken: String): Map<String, Any>? {
+    fun payload(accessToken: String): Map<String, Any>? {
         return authTokenService.payloadOrNull(accessToken)
     }
 

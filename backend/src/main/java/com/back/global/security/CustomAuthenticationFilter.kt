@@ -92,7 +92,7 @@ class CustomAuthenticationFilter(
         var isAccessTokenValid = false
 
         if (isAccessTokenExists) {
-            val payload = memberService!!.payloadOrNull(accessToken)
+            val payload = memberService.payload(accessToken)
 
             if (payload != null) {
                 val id = payload["id"] as Long

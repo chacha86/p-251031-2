@@ -7,6 +7,6 @@ import java.util.*
 interface MemberRepository : JpaRepository<Member, Long> {
     
     // TODO: Optional 제거
-    fun findByUsername(username: String): Optional<Member>
+    fun findByUsername(username: String): Member?
     fun findByApiKey(apiKey: String): Optional<Member>
 }
