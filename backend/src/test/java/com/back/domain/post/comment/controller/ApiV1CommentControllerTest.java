@@ -161,7 +161,7 @@ public class ApiV1CommentControllerTest {
         Post post = postRepository.findById(targetPostId).get();
         Comment comment = post.findCommentById(targetCommentId).get();
 
-        assertThat(comment.getContent()).isEqualTo(content);
+        assertThat(comment.content).isEqualTo(content);
     }
 
     @Test
