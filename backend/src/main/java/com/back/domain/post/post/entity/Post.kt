@@ -15,13 +15,12 @@ import java.util.*
 @Entity
 class Post(
     @field:ManyToOne(fetch = FetchType.LAZY)
-    var author: Member,
 
-    @JvmField
-    var title: String,
+    @JvmField var author: Member,
 
-    @JvmField
-    var content: String
+    @JvmField var title: String,
+
+    @JvmField var content: String
 ) : BaseEntity() {
 
     @OneToMany(

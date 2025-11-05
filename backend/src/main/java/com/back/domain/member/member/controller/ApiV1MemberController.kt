@@ -17,14 +17,12 @@ class ApiV1MemberController(
     private val rq: Rq
 ) {
 
-    @JvmRecord
     data class JoinReqBody(
         @field:NotBlank @field:Size(min = 2, max = 30) val username: String,
         @field:NotBlank @field:Size(min = 2, max = 30) val password: String,
         @field:NotBlank @field:Size(min = 2, max = 30) val nickname: String
     )
 
-    @JvmRecord
     data class JoinResBody(
         val memberDto: MemberDto
     )
@@ -49,13 +47,11 @@ class ApiV1MemberController(
     }
 
 
-    @JvmRecord
     data class LoginReqBody(
         @field:NotBlank @field:Size(min = 2, max = 30) val username: String,
         @field:NotBlank @field:Size(min = 2, max = 30) val password: String
     )
 
-    @JvmRecord
     data class LoginResBody(
         val memberDto: MemberDto,
         val apiKey: String,
@@ -104,7 +100,6 @@ class ApiV1MemberController(
     }
 
 
-    @JvmRecord
     data class MeResBody(
         val memberDto: MemberDto
     )

@@ -2,7 +2,7 @@ package com.back.global.rsData
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 
-class RsData<T> @JvmOverloads constructor(
+class RsData<T> (
     val resultCode: String,
     val msg: String,
     val data: T? = null

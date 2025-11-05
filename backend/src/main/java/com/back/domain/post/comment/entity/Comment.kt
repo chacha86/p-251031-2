@@ -14,8 +14,7 @@ class Comment(
     @field:ManyToOne(fetch = FetchType.LAZY)
     var author: Member,
 
-    @JvmField
-    var content: String,
+    @JvmField var content: String,
 
     @field:JsonIgnore
     @field:ManyToOne(fetch = FetchType.LAZY)

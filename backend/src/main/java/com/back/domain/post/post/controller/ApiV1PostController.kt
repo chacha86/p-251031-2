@@ -59,14 +59,11 @@ class ApiV1PostController(
         )
     }
 
-
-    @JvmRecord
     data class PostWriteReqBody(
         @field:NotBlank @field:Size(min = 2, max = 10) val title: String,
         @field:NotBlank @field:Size(min = 2, max = 100) val content: String
     )
 
-    @JvmRecord
     data class PostWriteResBody(
         val postDto: PostDto
     )
@@ -90,7 +87,6 @@ class ApiV1PostController(
     }
 
 
-    @JvmRecord
     data class PostModifyReqBody(
         @field:NotBlank @field:Size(min = 2, max = 10) val title: String,
         @field:NotBlank @field:Size(min = 2, max = 100) val content: String
