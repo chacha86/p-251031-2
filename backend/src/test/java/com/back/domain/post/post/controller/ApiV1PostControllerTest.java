@@ -348,8 +348,8 @@ public class ApiV1PostControllerTest {
         // 선택적 검증
         Post post = postRepository.findById(targetId).get();
 
-        assertThat(post.getTitle()).isEqualTo(title);
-        assertThat(post.getContent()).isEqualTo(content);
+        assertThat(post.title).isEqualTo(title);
+        assertThat(post.content).isEqualTo(content);
     }
 
     @Test
