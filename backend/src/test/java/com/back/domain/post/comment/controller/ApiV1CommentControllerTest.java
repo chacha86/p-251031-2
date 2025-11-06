@@ -159,7 +159,7 @@ public class ApiV1CommentControllerTest {
                 .andExpect(jsonPath("$.msg").value("%d번 댓글이 수정되었습니다.".formatted(targetCommentId)));
 
         Post post = postRepository.findById(targetPostId).get();
-        Comment comment = post.findCommentById(targetCommentId).get();
+        Comment comment = post.findCommentById(targetCommentId);
 
         assertThat(comment.content).isEqualTo(content);
     }
@@ -219,7 +219,7 @@ public class ApiV1CommentControllerTest {
 
         // 선택적 검증
         Post post = postRepository.findById(targetPostId).orElse(null);
-        Comment comment = post.findCommentById(targetCommentId).orElse(null);
+        Comment comment = post.findCommentById(targetCommentId);
         assertThat(comment).isNull();
     }
 

@@ -4,6 +4,7 @@ import com.back.domain.post.post.dto.PostDto
 import com.back.domain.post.post.service.PostService
 import com.back.global.rq.Rq
 import com.back.global.rsData.RsData
+import com.back.standard.extentions.getOrThrow
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -37,7 +38,7 @@ class ApiV1PostController(
     fun getItem(
         @PathVariable id: Long
     ): PostDto {
-        val post = postService.findById(id).get()
+        val post = postService.findById(id).getOrThrow()
         return PostDto(post)
     }
 
@@ -48,7 +49,7 @@ class ApiV1PostController(
         @PathVariable id: Long
     ): RsData<Void> {
         val actor = rq.actor
-        val post = postService.findById(id).get()
+        val post = postService.findById(id).getOrThrow()
 
         post.checkActorDelete(actor)
         postService.delete(post)
@@ -102,7 +103,7 @@ class ApiV1PostController(
     ): RsData<Void> {
         val actor = rq.actor
 
-        val post = postService.findById(id).get()
+        val post = postService.findById(id).getOrThrow()
         post.checkActorModify(actor)
         postService.modify(post, reqBody.title, reqBody.content)
 

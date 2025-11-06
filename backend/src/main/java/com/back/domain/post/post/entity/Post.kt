@@ -4,13 +4,13 @@ import com.back.domain.member.member.entity.Member
 import com.back.domain.post.comment.entity.Comment
 import com.back.global.exception.ServiceException
 import com.back.global.jpa.entity.BaseEntity
+import com.back.standard.extentions.getOrThrow
 import jakarta.persistence.CascadeType.PERSIST
 import jakarta.persistence.CascadeType.REMOVE
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.OneToMany
-import java.util.*
 
 @Entity
 class Post(
@@ -43,21 +43,18 @@ class Post(
     }
 
     fun deleteComment(commentId: Long) {
-        val comment = findCommentById(commentId).get()
+        val comment = findCommentById(commentId).getOrThrow()
         comments.remove(comment)
     }
 
     fun updateComment(commentId: Long, content: String): Comment {
-        val comment = findCommentById(commentId).get()
+        val comment = findCommentById(commentId).getOrThrow()
         comment.update(content)
         return comment
     }
 
-    // TODO: Optional 제거, stream 제거
-    fun findCommentById(commentId: Long): Optional<Comment> {
-        return comments.stream()
-            .filter { c: Comment -> c.id == commentId }
-            .findFirst()
+    fun findCommentById(commentId: Long): Comment? {
+        return comments.firstOrNull { it.id == commentId }
     }
 
     fun checkActorModify(actor: Member) {
