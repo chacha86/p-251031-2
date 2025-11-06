@@ -5,6 +5,7 @@ import com.back.domain.member.member.service.MemberService
 import com.back.global.exception.ServiceException
 import com.back.global.rq.Rq
 import com.back.global.rsData.RsData
+import com.back.standard.extentions.getOrThrow
 import jakarta.validation.Valid
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Size
@@ -102,7 +103,7 @@ class ApiV1MemberController(
 
     @GetMapping("/me")
     fun me(): RsData<MeResBody> {
-        val author = memberService.findById(rq.actor.id).get()
+        val author = memberService.findById(rq.actor.id).getOrThrow()
 
         return RsData(
             "200-1",

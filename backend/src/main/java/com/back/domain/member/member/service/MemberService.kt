@@ -3,9 +3,9 @@ package com.back.domain.member.member.service
 import com.back.domain.member.member.entity.Member
 import com.back.domain.member.member.repository.MemberRepository
 import com.back.global.exception.ServiceException
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
-import java.util.*
 
 @Service
 class MemberService(
@@ -42,7 +42,7 @@ class MemberService(
         return memberRepository.findByUsername(username)
     }
 
-    fun findByApiKey(apiKey: String): Optional<Member> {
+    fun findByApiKey(apiKey: String): Member?{
         return memberRepository.findByApiKey(apiKey)
     }
 
@@ -50,13 +50,12 @@ class MemberService(
         return authTokenService.genAccessToken(member)
     }
 
-    // TODO: payload로 이름 변경 고민
     fun payload(accessToken: String): Map<String, Any>? {
         return authTokenService.payloadOrNull(accessToken)
     }
 
-    fun findById(id: Long): Optional<Member> {
-        return memberRepository.findById(id)
+    fun findById(id: Long): Member? {
+        return memberRepository.findByIdOrNull(id)
     }
 
     fun findAll(): List<Member> {

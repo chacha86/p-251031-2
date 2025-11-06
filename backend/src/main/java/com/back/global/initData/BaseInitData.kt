@@ -2,17 +2,13 @@ package com.back.global.initData
 
 import com.back.domain.member.member.service.MemberService
 import com.back.domain.post.post.service.PostService
+import com.back.standard.extentions.getOrThrow
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.ApplicationRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Lazy
 import org.springframework.transaction.annotation.Transactional
-
-
-fun <T : Any> T?.getOrThrow(): T {
-    return this ?: throw NoSuchElementException()
-}
 
 @Configuration
 class BaseInitData(
