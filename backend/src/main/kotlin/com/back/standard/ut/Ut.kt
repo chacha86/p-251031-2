@@ -11,7 +11,6 @@ object Ut {
 
     object jwt {
 
-        @JvmStatic
         fun toString(secret: String, expireSeconds: Long, body: Map<String, Any>): String {
             val claimsBuilder = Jwts.claims()
 
@@ -36,7 +35,6 @@ object Ut {
             return jwt
         }
 
-        @JvmStatic
         fun isValid(jwt: String, secretPattern: String): Boolean {
             val secretKey = Keys.hmacShaKeyFor(secretPattern.toByteArray(StandardCharsets.UTF_8))
 
@@ -50,7 +48,6 @@ object Ut {
             }.getOrElse { false }
         }
 
-        @JvmStatic
         fun payloadOrNull(jwt: String, secretPattern: String): Map<String, Any>? {
             val secretKey = Keys.hmacShaKeyFor(secretPattern.toByteArray(StandardCharsets.UTF_8))
 

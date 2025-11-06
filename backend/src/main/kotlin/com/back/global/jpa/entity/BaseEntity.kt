@@ -12,7 +12,6 @@ import java.util.*
 abstract class BaseEntity(
 
     @Id
-    @JvmField
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0
 

@@ -16,11 +16,11 @@ import jakarta.persistence.OneToMany
 class Post(
     @field:ManyToOne(fetch = FetchType.LAZY)
 
-    @JvmField var author: Member,
+    var author: Member,
 
-    @JvmField var title: String,
+    var title: String,
 
-    @JvmField var content: String
+    var content: String
 ) : BaseEntity() {
 
     @OneToMany(
